@@ -54,3 +54,11 @@ The trained model is integrated with a Flask-based backend and a simple web inte
 **Final Model Accuracy:** ~ **75%**
 
 ---
+
+## 🚀 Web Application
+- Users can upload an image via the web interface
+- Image is sent to the Flask backend as Base64
+- Backend performs face detection, feature extraction, and classification
+- Predicted sports personality and class probabilities are returned and displayed
+
+---
