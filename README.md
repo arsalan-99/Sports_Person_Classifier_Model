@@ -6,7 +6,9 @@ The trained model is integrated with a Flask-based backend and a simple web inte
 ---
 
 ## 🌐 Web App Preview
-
+<p align="center">
+  <img src="UI/Screenshot.png">
+</p>
 
 ---
 
