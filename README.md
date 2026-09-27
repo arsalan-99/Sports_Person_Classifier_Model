@@ -1,67 +1,53 @@
-<h1 align="center"> Sports Celebrity Image Classification Model</h1>
+# Sports Person Classifier
 
+An image classification web app that identifies five sports celebrities from uploaded photos. It uses classical computer vision for face and feature extraction paired with a trained classifier served over a Flask API.
 
-This project is a computer vision–based Machine Learning application that identifies sports personalities from images using classical computer vision techniques and supervised learning. 
-The system detects faces in an image, extracts meaningful features using wavelet transforms, and classifies the individual using a trained machine learning model.  
-The trained model is integrated with a Flask-based backend and a simple web interface for real-time image classification.
+## Preview
 
----
-
-## 🌐 Web App Preview
 <p align="center">
   <img src="UI/Screenshot.png">
 </p>
 
----
+## Tech Stack
 
-## Tools, Libraries & Techniques Used
+- Python
+- Flask
+- OpenCV
+- Scikit-learn
+- PyWavelets
+- NumPy
+- JavaScript / HTML / CSS
 
-### 🔧 Libraries
-- **NumPy** – Numerical computations  
-- **Pandas** – Data handling and preprocessing  
-- **OpenCV** – Face and eye detection using Haar cascades  
-- **PyWavelets** – Wavelet-based feature extraction  
-- **Scikit-learn**
-  - Support Vector Machine (SVM)
-  - Random Forest Classifier
-  - Logistic Regression
-  - StandardScaler
-  - GridSearchCV
-- **Joblib** – Model serialization
-- **Flask** – Backend API for model inference  
+## How It Works
 
----
+- The frontend sends the uploaded image as a Base64 string to the Flask `/classify_image` endpoint.
+- OpenCV detects faces and eyes using Haar cascade classifiers to crop and isolate the face region.
+- Each cropped face is resized and processed with a 2D Discrete Wavelet Transform (PyWavelets) to extract frequency/texture features, which are stacked with raw pixel data into a single feature vector.
+- A scikit-learn pipeline (StandardScaler and Logistic Regression) evaluates the feature vector and returns the predicted athlete along with class probability scores.
 
-## Approach & Methodology
+## Run It
 
-### Image Preprocessing
-- Face detection using Haar Cascade classifiers
-- Eye detection to validate face regions
-- Cropped face images resized to 32×32 pixels
-- Conversion to grayscale for wavelet transformation
+Clone the repository and install dependencies:
 
-### Feature Extraction
-- Applied **Discrete Wavelet Transform (DWT)** to capture texture and edge information
-- Combined raw pixel values with wavelet-transformed features
-- Final feature vector created by stacking both representations
+```bash
+git clone https://github.com/arsalan-99/Sports_Person_Classifier_Model.git
+cd Sports_Person_Classifier_Model
 
----
+python -m venv .venv
+source .venv/bin/activate
 
-## Model Training & Evaluation
-- Trained and evaluated multiple ML models:
-  - Support Vector Machine (SVM)
-  - Random Forest
-  - Logistic Regression
-- Used **GridSearchCV** for hyperparameter tuning
-- Selected **Logistic Regression** as the final model based on validation performance
-**Final Model Accuracy:** ~ **75%**
+pip install -r requirements.txt
+```
 
----
+Start the Flask backend:
 
-## Web Application
-- Users can upload an image via the web interface
-- Image is sent to the Flask backend as Base64
-- Backend performs face detection, feature extraction, and classification
-- Predicted sports personality and class probabilities are returned and displayed
+```bash
+cd server
+python server.py
+```
 
----
+Open `UI/app.html` directly in your browser, or serve the UI:
+
+```bash
+python -m http.server 8000 --directory UI
+```
